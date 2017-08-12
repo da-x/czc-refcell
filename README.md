@@ -8,7 +8,7 @@ Thus, the `czc-refcell` module makes a proxy to the standard library `RefCell` t
 
 This provided compile-time conditional type has the same overhead of `UnsafeCell`, but mimics the interface of `RefCell`. Its implementation is based on a stripped-down `RefCell` from the standard library, where the `borrow` and `borrow_mut` are in-lined to a direct proxy into the `UnsafeCell` without any checking.
 
-Note that under the non-default unchecked `RefCell` build mode, code paths that would originally result in `RefCell`-led panics will instead lead to undefined behavior, which can be exploitable, from a security perspective, and introduce program instabilities from a correctness perspective. This is tradeoff between risk and performance, and users of unchecked `RefCell` builds should be aware of that.
+Note that under the non-default unchecked `RefCell` build mode, code paths that would originally result in `RefCell`-led panics will instead lead to undefined behavior, which can be exploitable, from a security perspective, and introduce program instabilities from a correctness perspective. **This is a tradeoff between risk and performance, and users of unchecked `RefCell` builds should be aware of that**.
 
 # Usage
 
