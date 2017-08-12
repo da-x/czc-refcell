@@ -30,3 +30,7 @@ You can test the performance of a unchecked `RefCell` with a build feature flag,
 ```shell
 cargo build --features 'fast_refcell'
 ```
+
+# TODO
+
+* For the exported stub type, think whether to export the `try_borrow` and `try_borrow_mut` as versions that always return `Err`. Currently, these methods are not implemented.
