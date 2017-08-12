@@ -28,7 +28,7 @@ unchecked_refcell = ["czc-refcell/unchecked_refcell"]
 You can test the performance of a unchecked `RefCell` with a build feature flag, e.g:
 
 ```shell
-cargo build --features 'fast_refcell'
+cargo build --features 'unchecked_refcell'
 ```
 
 # TODO
