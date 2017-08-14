@@ -4,7 +4,7 @@ The [RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) structure 
 
 With `RefCell`, as long as the `try_borrow` and `try_borrow_mut` functions are not used, and as long as sufficiently done testing has empirically verified that the `borrow` and `borrow_mut` function don't panic on run-time, then the overhead of `RefCell` can be reduced to zero using a feature enablement in the compilation stage, treating it as an `UnsafeCell`, its underlying implementation, without changing program semantics.
 
-Thus, the `czc-refcell` module makes a proxy to the standard library `RefCell` that allows it to function as an `UnsafeCell`, if the `unchecked_refcell` feature is enabled, using a different type for `RefCell`. Otherwise, and by default, the standard `std::cell::RefCell` is proxied as it is with all the guarantees it provides.
+Thus, the `czc-refcell` module makes a proxy to the standard library `RefCell` that allows it to function as an `UnsafeCell`, if the `unsafe_refcell_as_safe` feature is enabled, using a different type for `RefCell`. Otherwise, and by default, the standard `std::cell::RefCell` is proxied as it is with all the guarantees it provides.
 
 This provided compile-time conditional type has the same overhead of `UnsafeCell`, but mimics the interface of `RefCell`. Its implementation is based on a stripped-down `RefCell` from the standard library, where the `borrow` and `borrow_mut` are in-lined to a direct proxy into the `UnsafeCell` without any checking.
 
@@ -26,13 +26,13 @@ You should allow the users of your library to control whether you'd be giving th
 
 ```toml
 [features]
-unchecked_refcell = ["czc-refcell/unchecked_refcell"]
+unsafe_refcell_as_safe = ["czc-refcell/unsafe_refcell_as_safe"]
 ```
 
 You can test the performance of a unchecked `RefCell` with a build feature flag, e.g:
 
 ```shell
-cargo build --features 'unchecked_refcell'
+cargo build --features 'unsafe_refcell_as_safe'
 ```
 
 # TODO
